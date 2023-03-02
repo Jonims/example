@@ -54,6 +54,13 @@ public class GreetingsController {
 
     }
 
+    @PutMapping(value = "/reserva/atualizar")
+    public ResponseEntity<ReservaModel> atualizar(@RequestBody ReservaModel reserva){
+
+        ReservaModel res = reservasRepository.save(reserva);
+        return new ResponseEntity<ReservaModel>(res, HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/reserva/deletar") // mapeia a url
     @ResponseBody // Descrição da resposta
     public ResponseEntity<String> deletar(@RequestParam Long id){ // Recebe da requisição o parâmetro
