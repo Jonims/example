@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class GreetingsController {
+public class RerservaController {
 
-    @Autowired// injeção de dependências
+  /*  @Autowired// injeção de dependências
     private ReservasRepository reservasRepository;
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -24,15 +24,24 @@ public class GreetingsController {
     public String mostrarNome(@PathVariable String nome){
         return "Ola " + nome;
     }
+
+
     @RequestMapping(value = "/reserva/{cliente}", method = RequestMethod.GET) // end point para salvar/cadastrar
     @ResponseStatus(HttpStatus.OK)
     public String salvar(@PathVariable String cliente){
 
         ReservaModel reserva = new ReservaModel();
-        reserva.setNome(cliente);
+        reserva.setNomeCliente(cliente);
         reservasRepository.save(reserva); // grava informações do cliente no banco de dados
 
         return "Reserva " + cliente + " registrado com sucesso!";
+    } */
+
+    @Autowired
+    private ReservasRepository reservasRepository;
+
+    public RerservaController(ReservasRepository reservasRepository) {
+        this.reservasRepository = reservasRepository;
     }
 
     @GetMapping(value = "/reservas")
@@ -42,6 +51,7 @@ public class GreetingsController {
         List<ReservaModel> reservas =  reservasRepository.findAll(); // consulta no banco de dados todas as reservas
 
         return new ResponseEntity<List<ReservaModel>>(reservas, HttpStatus.OK); // retorna a lista em json
+
 
     }
 
@@ -60,6 +70,8 @@ public class GreetingsController {
         ReservaModel res = reservasRepository.save(reserva);
         return new ResponseEntity<ReservaModel>(res, HttpStatus.OK);
     }
+
+
 
     @DeleteMapping(value = "/reserva/deletar") // mapeia a url
     @ResponseBody // Descrição da resposta

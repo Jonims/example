@@ -3,6 +3,7 @@ package com.projeto.projetorestaurante.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -17,9 +18,19 @@ public class ReservaModel implements Serializable {
 
     private String telefone;
 
-    private String cpf;
+    @Temporal(TemporalType.DATE)
+    private Date dataReserva;
 
     private int quantidadePessoas;
+
+    @Deprecated
+    public ReservaModel(){
+
+    }
+
+    public ReservaModel(String nomeCliente){
+        this.nomeCliente = nomeCliente;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -46,7 +57,7 @@ public class ReservaModel implements Serializable {
         return nomeCliente;
     }
 
-    public void setNome(String nomeCliente) {
+    public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
     }
 
@@ -58,12 +69,12 @@ public class ReservaModel implements Serializable {
         this.telefone = telefone;
     }
 
-    public String getCpf() {
-        return cpf;
+    public Date getDataReserva() {
+        return dataReserva;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setDataReserva() {
+        this.dataReserva = dataReserva;
     }
 
     public int getQuantidadePessoas() {
@@ -72,5 +83,12 @@ public class ReservaModel implements Serializable {
 
     public void setQuantidadePessoas(int quantidadePessoas) {
         this.quantidadePessoas = quantidadePessoas;
+    }
+
+    @Override
+    public String toString() {
+        return "ReservaModel{" +
+                "nomeCliente='" + nomeCliente + '\'' +
+                '}';
     }
 }
